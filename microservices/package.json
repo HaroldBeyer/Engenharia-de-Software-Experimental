@@ -2,7 +2,7 @@
   "name": "microservices",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev --transpile-only index.ts"
@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lowdb": "^1.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",

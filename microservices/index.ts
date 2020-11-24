@@ -12,8 +12,8 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 
-const instances: Instance[] = [new Instance('instance1', 0), new Instance('instance2', 0)];
-const loader = new Loader(instances);
+ const instances: Instance[] = [new Instance('instance1', 0), new Instance('instance2', 0)];
+ const loader = new Loader(instances);
 
 
 db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();

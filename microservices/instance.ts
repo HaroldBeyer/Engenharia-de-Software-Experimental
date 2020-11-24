@@ -1,9 +1,9 @@
-import * as low from 'lowdb';
 import { Post } from './post';
+const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+
 const adapter = new FileSync('db.json');
 const db = low(adapter);
-
 export class Instance {
   usage: number = 0;
   name: string;
@@ -16,7 +16,7 @@ export class Instance {
   }
 
 
-  async post(req, res) {
+  async post(req: any, res: any) {
     const init = Date.now();
     const body = req.body;
     const title = body.title;
@@ -35,7 +35,7 @@ export class Instance {
     });
   }
 
-  async get(req, res) {
+  async get(req:any, res:any) {
     const init = Date.now();
     const posts: Post[] = await db.get('posts').map('title').value();
 

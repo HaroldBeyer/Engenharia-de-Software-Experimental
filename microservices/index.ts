@@ -7,16 +7,16 @@ app.use(json());
 const port = Math.floor(Math.random() * 10000);
 
 const low = require('lowdb');
-const FileAsync = require('lowdb/adapters/FileSync');
+const FileAsync = require('lowdb/adapters/FileAsync');
 
 const adapter = new FileAsync('db.json');
-const db = low(adapter);
-
- const instances: Instance[] = [new Instance('instance1', 0), new Instance('instance2', 0)];
- const loader = new Loader(instances);
 
 
-db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
+const instances: Instance[] = [new Instance('instance1', 0), new Instance('instance2', 0)];
+const loader = new Loader(instances);
+
+
+
 
 app.get('/', (req, res) => {
   return loader.run('get', req, res);
@@ -26,7 +26,13 @@ app.post('/', (req, res) => {
   return loader.run('post', req, res);
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Running on ${port}`);
-  db.get('init').push(Date.now() - init).write();
+  const db = await low(adapter);
+  prepareDb(db);
 });
+
+function prepareDb(db: any) {
+  db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
+  db.get('init').push(Date.now() - init).write();
+}

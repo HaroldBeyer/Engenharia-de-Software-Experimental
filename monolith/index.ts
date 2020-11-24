@@ -3,10 +3,10 @@ import express, { json } from 'express';
 const app = express();
 app.use(json());
 const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
+const FileAsync = require('lowdb/adapters/FileAsync');
 const port = Math.floor(Math.random() * 10000);
 // const port = 8358;
-const adapter = new FileSync('db.json');
+const adapter = new FileAsync('db.json');
 const db = low(adapter);
 
 //padrão

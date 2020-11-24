@@ -17,7 +17,7 @@ export class Loader {
     });
   }
 
-  run(operation: string, req, res) {
+  run(operation: string, req: any, res: any) {
     const instance = this.retrieveInstance();
     if (operation == 'post') {
       return instance.post(req, res)

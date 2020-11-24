@@ -12,18 +12,16 @@ const db = low(adapter);
 //padrão
 db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
 
-
-
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     init = Date.now();
-    const posts: Post[] = db.get('posts').map('title').value();
+    const posts: Post[] = await db.get('posts').map('title').value();
 
     const response = res.json({
         message: `Posts: ${posts}`,
         code: 200
     })
 
-    db.get("exec").push({
+    await db.get("exec").push({
         type: "get",
         time: Date.now() - init,
         size: posts.length
@@ -32,13 +30,13 @@ app.get('/', (req, res) => {
     return response;
 });
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     init = Date.now();
     const body = req.body;
     const title = body.title;
-    db.get('posts').push({ id: (Math.random() * 1000), title }).write();
-    db.update('count', (n: number) => n++).write();
-    db.get("exec").push({
+    await db.get('posts').push({ id: (Math.random() * 1000), title }).write();
+    await db.update('count', (n: number) => n++).write();
+    await db.get("exec").push({
         type: "post",
         time: Date.now() - init
     }).write();

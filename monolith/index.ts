@@ -6,11 +6,8 @@ const low = require('lowdb');
 const FileAsync = require('lowdb/adapters/FileAsync');
 const port = Math.floor(Math.random() * 10000);
 // const port = 8358;
-const adapter = new FileAsync('db.json');
-const db = low(adapter);
 
-//padrão
-db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
+let db: any;
 
 app.get('/', async (req, res) => {
     init = Date.now();
@@ -45,7 +42,7 @@ app.post('/', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Running on ${port}`);
-    db.get('init').push(Date.now() - init).write();
+    configDb();
 });
 
 
@@ -56,4 +53,13 @@ class Post {
         this.id = id;
         this.title = title;
     }
+}
+
+async function configDb() {
+    const adapter = new FileAsync('db.json');
+    const db = await low(adapter);
+
+    await db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
+    await db.get('init').push(Date.now() - init).write();
+    return db;
 }

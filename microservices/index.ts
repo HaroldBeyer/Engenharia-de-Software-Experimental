@@ -7,9 +7,9 @@ app.use(json());
 const port = Math.floor(Math.random() * 10000);
 
 const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
+const FileAsync = require('lowdb/adapters/FileSync');
 
-const adapter = new FileSync('db.json');
+const adapter = new FileAsync('db.json');
 const db = low(adapter);
 
  const instances: Instance[] = [new Instance('instance1', 0), new Instance('instance2', 0)];

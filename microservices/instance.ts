@@ -24,7 +24,8 @@ export class Instance {
     await db.update('count', (n: number) => n++).write();
     await db.get("exec").push({
       type: "post",
-      time: Date.now() - init
+      time: Date.now() - init,
+      instance: this.name
     }).write();
 
     this.usage -= this.currentUsage;
@@ -35,7 +36,7 @@ export class Instance {
     });
   }
 
-  async get(req:any, res:any) {
+  async get(req: any, res: any) {
     const init = Date.now();
     const posts: Post[] = await db.get('posts').map('title').value();
 

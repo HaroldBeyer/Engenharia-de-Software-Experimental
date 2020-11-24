@@ -1,0 +1,1 @@
+const lambdaLocal = require('lambda-local');

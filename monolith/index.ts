@@ -1,7 +1,10 @@
 let init = Date.now();
 import express, { json } from 'express';
 const app = express();
+const timeout = require('connect-timeout');
 app.use(json());
+app.use(timeout('2s'));
+app.use(haltOnTimedout)
 const low = require('lowdb');
 const FileAsync = require('lowdb/adapters/FileAsync');
 const port = Math.floor(Math.random() * 10000);
@@ -62,4 +65,9 @@ async function configDb() {
     await db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
     await db.get('init').push(Date.now() - init).write();
     return db;
+}
+
+
+function haltOnTimedout(req: any, res: any, next: any) {
+    if (!req.timedout) next()
 }

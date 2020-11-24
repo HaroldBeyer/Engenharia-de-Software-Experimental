@@ -1,0 +1,14 @@
+{
+    "lambda": {
+        "init": [],
+        "exec": []
+    },
+    "microservices": {
+        "init": [],
+        "exec": []
+    },
+    "monolith": {
+        "init": [],
+        "exec": []
+    }
+}

@@ -1,44 +1,7 @@
 {
   "post": {},
   "count": 0,
-  "posts": [
-    {
-      "id": 331.84188077087475,
-      "title": "Teste"
-    },
-    {
-      "id": 361.69531992795646,
-      "title": "Teste12121"
-    },
-    {
-      "id": 629.8617286222434,
-      "title": "Teste1213121"
-    },
-    {
-      "id": 105.37020987311419,
-      "title": "haroldo haroldo"
-    }
-  ],
-  "init": [
-    81,
-    75
-  ],
-  "exec": [
-    {
-      "type": "get",
-      "time": 4
-    },
-    {
-      "type": "post",
-      "time": 0
-    },
-    {
-      "type": "post",
-      "time": 1
-    },
-    {
-      "type": "get",
-      "time": 0
-    }
-  ]
+  "posts": [],
+  "init": [],
+  "exec": []
 }

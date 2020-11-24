@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 
     db.get("exec").push({
         type: "get",
-        time: Date.now() - init
+        time: Date.now() - init,
+        size: posts.length
     }).write()
 
     return response;

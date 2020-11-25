@@ -7,6 +7,7 @@ app.use(timeout('2s'));
 app.use(haltOnTimedout)
 const low = require('lowdb');
 const FileAsync = require('lowdb/adapters/FileAsync');
+const adapter = new FileAsync('db.json');
 const port = Math.floor(Math.random() * 10000);
 // const port = 8358;
 
@@ -43,9 +44,9 @@ app.post('/', async (req, res) => {
     res.send("sent post request");
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`Running on ${port}`);
-    configDb();
+    await configDb();
 });
 
 
@@ -59,12 +60,9 @@ class Post {
 }
 
 async function configDb() {
-    const adapter = new FileAsync('db.json');
-    const db = await low(adapter);
-
+    db = await low(adapter);
     await db.defaults({ posts: [], count: 0, init: [], exec: [] }).write();
     await db.get('init').push(Date.now() - init).write();
-    return db;
 }
 
 

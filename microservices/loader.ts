@@ -19,6 +19,7 @@ export class Loader {
 
   run(operation: string, req: any, res: any) {
     const instance = this.retrieveInstance();
+    instance.addUsage(256);
     if (operation == 'post') {
       return instance.post(req, res)
     }

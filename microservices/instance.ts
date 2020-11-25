@@ -18,6 +18,10 @@ export class Instance {
 
   }
 
+  addUsage(usage: number) {
+    this.usage += usage
+  }
+
   private async prepareDB(adapter: any) {
     this.db = await low(adapter);
   }
